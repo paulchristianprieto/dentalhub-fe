@@ -1,5 +1,9 @@
 "use client";
 
+export interface DentistI {
+  name?: string;
+  schedule?: any;
+}
 export interface AppointmentI {
   id: string;
   createdAt: string;
@@ -10,6 +14,7 @@ export interface AppointmentI {
   endTime?: string;
   agenda?: string;
   dentistId?: any;
+  dentists?: DentistI;
 }
 
 export default function Appointments({
@@ -17,11 +22,19 @@ export default function Appointments({
 }: {
   appointments: AppointmentI[] | null;
 }) {
-  return appointments?.map((appointment) => {
-    return (
-      <div key={appointment.id}>
-        <p>{appointment?.contactNumber}</p>
-      </div>
-    );
-  });
+  return (
+    <>
+      <h1 className="font-bold text-2xl">Upcoming Appointments</h1>
+      {appointments?.map((appointment) => {
+        return (
+          <div key={appointment.id} className="pb-4">
+            <p>Doctor: {appointment?.dentists?.name}</p>
+            <p>Agenda: {appointment?.agenda}</p>
+            <p>Date: {appointment?.date}</p>
+            <p>Time: {`${appointment.startTime} - ${appointment.endTime}`}</p>
+          </div>
+        );
+      })}
+    </>
+  );
 }
