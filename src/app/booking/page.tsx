@@ -9,13 +9,7 @@ export default async function BookingPage() {
     data: { user },
   } = await supabase.auth.getUser();
 
-  const {
-    data: dentists,
-    error,
-    count,
-  } = await supabase.from("dentists").select("*").range(0, 9);
-
-  console.log({ user, dentists, error, count });
+  const { data: dentists } = await supabase.from("dentists").select("*");
 
   return <AppointmentForm user={user} dentists={dentists} />;
 }

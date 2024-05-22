@@ -44,5 +44,5 @@ export async function createAppointment(formData: FormData) {
   }
 
   revalidatePath("/", "layout");
-  redirect("/account");
+  redirect("/");
 }
