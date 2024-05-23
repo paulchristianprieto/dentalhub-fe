@@ -9,15 +9,6 @@ export default async function Account() {
     data: { user },
   } = await supabase.auth.getUser();
 
-  const { data: appointments } = await axios.get(
-    `${process.env.NEXT_PUBLIC_DENTALHUB_API}/appointments`,
-    {
-      data: {
-        userId: user?.id,
-      },
-    }
-  );
-
   return (
     <div className="p-4 mt-8">
       <AccountForm user={user} />
