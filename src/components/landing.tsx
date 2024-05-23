@@ -8,7 +8,7 @@ export default function Landing({ user }: { user: User | null }) {
   const router = useRouter();
 
   return (
-    <main className="flex bg-white min-h-screen flex-row items-center p-24">
+    <main className="flex bg-white flex-row items-center p-24">
       <Image alt="bg" src="/dentist.svg" width={400} height={200} />
       <div className="">
         <h1 className="text-black text-[60px] font-bold">All Out Smiles</h1>
