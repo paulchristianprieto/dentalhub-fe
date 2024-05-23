@@ -23,7 +23,7 @@ body {
 }
 
 * {
-  color: var(--custom-color);
+  color: black;
   font-family: var(--custom-font-family);
   box-sizing: border-box;
 }
@@ -260,6 +260,12 @@ button.primary,
   background-color: var(--custom-color-brand);
   border: 1px solid var(--custom-color-brand);
 }
+
+button.secondary,
+.button.secondary {
+  background-color: var(--custom-color-secondary);
+  border: 1px solid var(--custom-color-secondary);
+};
 
 /* Widgets */
 
