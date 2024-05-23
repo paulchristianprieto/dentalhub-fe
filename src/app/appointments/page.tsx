@@ -1,6 +1,7 @@
 import axios from "axios";
-import AccountForm from "./account-form";
+import AccountForm from "../account/account-form";
 import { createClient } from "@/utils/supabase/server";
+import Appointments from "./appointments";
 
 export default async function Account() {
   const supabase = createClient();
@@ -20,7 +21,7 @@ export default async function Account() {
 
   return (
     <div className="p-4 mt-8">
-      <AccountForm user={user} />
+      <Appointments appointments={appointments} user={user} />
     </div>
   );
 }

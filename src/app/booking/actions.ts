@@ -20,8 +20,6 @@ export async function updateAppointment(formData: FormData) {
     .add(30, "m")
     .format("hh:mm");
 
-  // type-casting here for convenience
-  // in practice, you should validate your inputs
   const data = {
     userId: formData.get("userId") as string,
     agenda: formData.get("agenda") as string,
@@ -43,7 +41,7 @@ export async function updateAppointment(formData: FormData) {
   }
 
   revalidatePath("/", "layout");
-  redirect("/account");
+  redirect("/appointments");
 }
 
 export async function createAppointment(formData: FormData) {
@@ -51,8 +49,6 @@ export async function createAppointment(formData: FormData) {
     .add(30, "m")
     .format("hh:mm");
 
-  // type-casting here for convenience
-  // in practice, you should validate your inputs
   const data = {
     userId: formData.get("userId") as string,
     agenda: formData.get("agenda") as string,
@@ -73,5 +69,5 @@ export async function createAppointment(formData: FormData) {
   }
 
   revalidatePath("/", "layout");
-  redirect("/");
+  redirect("/appointments");
 }

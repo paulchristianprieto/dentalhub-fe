@@ -26,9 +26,20 @@ export default function Appointment({
       <p>Agenda: {appointment?.agenda}</p>
       <p>Date: {appointment?.date}</p>
       <p>Time: {`${appointment.startTime} - ${appointment.endTime}`}</p>
-      <button onClick={() => router.push(`/booking/${appointment.id}`)}>
-        View
-      </button>
+      <div className="mt-2">
+        <button
+          className="mr-2"
+          onClick={() => router.push(`/booking/${appointment.id}`)}
+        >
+          View
+        </button>
+        <button
+          className="button secondary"
+          onClick={() => router.push(`/booking/${appointment.id}`)}
+        >
+          Cancel
+        </button>
+      </div>
     </>
   );
 }

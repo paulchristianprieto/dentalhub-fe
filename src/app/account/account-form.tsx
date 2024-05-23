@@ -6,7 +6,6 @@ import Avatar from "./avatar";
 
 export default function AccountForm({ user }: { user: User | null }) {
   const supabase = createClient();
-  const [isEditMode, setIsEditMode] = useState<boolean>(false);
   const [loading, setLoading] = useState(true);
   const [fullname, setFullname] = useState<string | null>(null);
   const [username, setUsername] = useState<string | null>(null);
@@ -57,7 +56,6 @@ export default function AccountForm({ user }: { user: User | null }) {
         updated_at: new Date().toISOString(),
       });
       if (error) throw error;
-      setIsEditMode(false);
       alert("Profile updated!");
     } catch (error) {
       alert("Error updating the data!");
@@ -66,11 +64,7 @@ export default function AccountForm({ user }: { user: User | null }) {
     }
   }
 
-  return !isEditMode ? (
-    <>
-      <button onClick={() => setIsEditMode(true)}>Edit Profile</button>
-    </>
-  ) : (
+  return (
     <div className="form-widget">
       <div>
         <label htmlFor="email">Email</label>
@@ -95,16 +89,6 @@ export default function AccountForm({ user }: { user: User | null }) {
           disabled={loading}
         >
           {loading ? "Loading ..." : "Update"}
-        </button>
-      </div>
-
-      <div>
-        <button
-          className="button secondary block"
-          onClick={() => setIsEditMode(false)}
-          disabled={loading}
-        >
-          Cancel
         </button>
       </div>
 

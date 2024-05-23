@@ -1,7 +1,9 @@
 "use client";
 
+import React from "react";
 import Appointment from "./appointment";
 import { type User } from "@supabase/supabase-js";
+import { useRouter } from "next/navigation";
 
 export interface DentistI {
   id?: string;
@@ -28,16 +30,24 @@ export default function Appointments({
   appointments: AppointmentI[] | null;
   user: User | null;
 }) {
+  const router = useRouter();
   return (
-    <>
-      <h1 className="font-bold text-2xl">Upcoming Appointments</h1>
+    <div>
+      <div className="flex items-center">
+        <h1 className="font-bold text-2xl mr-4">Upcoming Appointments</h1>
+        <button onClick={() => router.push("/booking")}>New Appointment</button>
+      </div>
+      <hr className="my-4" />
       {appointments?.map((appointment) => {
         return (
-          <div key={appointment.id} className="pb-4">
-            <Appointment user={user} appointment={appointment} />
-          </div>
+          <React.Fragment key={appointment.id}>
+            <div className="">
+              <Appointment user={user} appointment={appointment} />
+            </div>
+            <hr className="py-0 my-4" />
+          </React.Fragment>
         );
       })}
-    </>
+    </div>
   );
 }
