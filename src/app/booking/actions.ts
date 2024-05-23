@@ -15,9 +15,38 @@ export interface CreateAppointmentSchema {
   dentistId: string;
 }
 
-export async function createAppointment(formData: FormData) {
-  console.log({ formData });
+export async function updateAppointment(formData: FormData) {
+  const endTime = moment(`${formData.get("date")} ${formData.get("time")}`)
+    .add(30, "m")
+    .format("hh:mm");
 
+  // type-casting here for convenience
+  // in practice, you should validate your inputs
+  const data = {
+    userId: formData.get("userId") as string,
+    agenda: formData.get("agenda") as string,
+    startTime: formData.get("time") as string,
+    endTime: endTime,
+    date: formData.get("date") as string,
+    contactNumber: formData.get("contact") as string,
+    dentistId: formData.get("dentist") as string,
+    id: formData.get("id") as string,
+  };
+
+  const { data: result, status } = await axios.put(
+    `${process.env.NEXT_PUBLIC_DENTALHUB_API}/appointments`,
+    data
+  );
+
+  if (status !== 200) {
+    redirect("/error");
+  }
+
+  revalidatePath("/", "layout");
+  redirect("/account");
+}
+
+export async function createAppointment(formData: FormData) {
   const endTime = moment(`${formData.get("date")} ${formData.get("time")}`)
     .add(30, "m")
     .format("hh:mm");

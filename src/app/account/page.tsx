@@ -21,7 +21,7 @@ export default async function Account() {
 
   return (
     <>
-      <Appointments appointments={appointments} />
+      <Appointments appointments={appointments} user={user} />
       <AccountForm user={user} />
     </>
   );

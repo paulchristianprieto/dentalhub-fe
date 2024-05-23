@@ -1,6 +1,10 @@
 "use client";
 
+import Appointment from "./appointment";
+import { type User } from "@supabase/supabase-js";
+
 export interface DentistI {
+  id?: string;
   name?: string;
   schedule?: any;
 }
@@ -19,8 +23,10 @@ export interface AppointmentI {
 
 export default function Appointments({
   appointments,
+  user,
 }: {
   appointments: AppointmentI[] | null;
+  user: User | null;
 }) {
   return (
     <>
@@ -28,10 +34,7 @@ export default function Appointments({
       {appointments?.map((appointment) => {
         return (
           <div key={appointment.id} className="pb-4">
-            <p>Doctor: {appointment?.dentists?.name}</p>
-            <p>Agenda: {appointment?.agenda}</p>
-            <p>Date: {appointment?.date}</p>
-            <p>Time: {`${appointment.startTime} - ${appointment.endTime}`}</p>
+            <Appointment user={user} appointment={appointment} />
           </div>
         );
       })}
