@@ -3,7 +3,7 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import Image from "next/image";
-import { useRouter } from "next/navigation";
+import { useRouter, usePathname } from "next/navigation";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -18,12 +18,16 @@ export default function LoggedInLayout({
   children: React.ReactNode;
 }>) {
   const router = useRouter();
+  const path = usePathname();
 
   return (
     <html lang="en">
       <body className={`${inter.className}`}>
         <div className="flex flex-row p-4 justify-between bg-slate-300">
-          <div className="flex flex-row">
+          <div
+            className="flex flex-row hover:cursor-pointer"
+            onClick={() => router.push("/")}
+          >
             <Image alt="logo" src="/dentist.svg" width={50} height={50} />
             <h1 className="text-black text-[40px] font-bold ml-2">
               All Out Smiles
@@ -31,13 +35,17 @@ export default function LoggedInLayout({
           </div>
           <div className="flex flex-row justify-center items-center gap-6">
             <div
-              className="hover:cursor-pointer"
+              className={`hover:cursor-pointer ${
+                path === "/account" ? "font-bold" : ""
+              }`}
               onClick={() => router.push("/account")}
             >
               Profile
             </div>
             <div
-              className="hover:cursor-pointer"
+              className={`hover:cursor-pointer ${
+                path === "/appointments" ? "font-bold" : ""
+              }`}
               onClick={() => router.push("/appointments")}
             >
               Appointments

@@ -1,10 +1,9 @@
 "use client";
 
-import { useState } from "react";
 import { AppointmentI } from "./appointments";
 import { type User } from "@supabase/supabase-js";
-import AppointmentForm from "../booking/appointment-form";
 import { useRouter } from "next/navigation";
+import { deleteAppointment } from "./actions";
 
 export interface DentistI {
   name?: string;
@@ -35,7 +34,7 @@ export default function Appointment({
         </button>
         <button
           className="button secondary"
-          onClick={() => router.push(`/booking/${appointment.id}`)}
+          onClick={() => deleteAppointment(appointment.id)}
         >
           Cancel
         </button>

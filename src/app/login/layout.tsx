@@ -18,7 +18,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${inter.className}`}>
         <div className="flex flex-row p-4 bg-slate-300">
-          <div className="flex flex-row">
+          <div className="flex flex-row hover:cursor-pointer">
             <Image alt="logo" src="/dentist.svg" width={50} height={50} />
             <h1 className="text-black text-[40px] font-bold ml-2">
               All Out Smiles

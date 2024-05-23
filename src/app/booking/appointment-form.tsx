@@ -1,7 +1,11 @@
 "use client";
 
 import { type User } from "@supabase/supabase-js";
-import { createAppointment, updateAppointment } from "./actions";
+import {
+  createAppointment,
+  deleteAppointment,
+  updateAppointment,
+} from "./actions";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 import { AppointmentI } from "../appointments/appointments";
@@ -82,24 +86,32 @@ export default function AppointmentForm({
         />
 
         <input
-          defaultValue={appointment ? appointment.userId : ""}
           name="userId"
           type="hidden"
-          value={user?.id}
+          value={appointment ? appointment.userId : user?.id}
         />
 
         <input
-          defaultValue={appointment ? appointment.id : ""}
+          value={appointment ? appointment.id : ""}
           name="id"
           type="hidden"
         />
 
         <button
-          className="mt-4"
+          className="mt-4 mr-2"
           formAction={appointment ? updateAppointment : createAppointment}
         >
-          {appointment ? "Update" : "Bookit"}
+          {appointment ? "Update" : "Submit"}
         </button>
+
+        {appointment ? (
+          <button
+            className="mt-4 button secondary hover:bg-slate-700"
+            onClick={() => deleteAppointment(appointment.id)}
+          >
+            Cancel
+          </button>
+        ) : null}
       </form>
     </div>
   );

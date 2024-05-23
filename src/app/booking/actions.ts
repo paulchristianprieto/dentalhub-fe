@@ -71,3 +71,15 @@ export async function createAppointment(formData: FormData) {
   revalidatePath("/", "layout");
   redirect("/appointments");
 }
+
+export async function deleteAppointment(id: string) {
+  const { status } = await axios.delete(
+    `${process.env.NEXT_PUBLIC_DENTALHUB_API}/appointments/${id}`
+  );
+  
+  if (status !== 200) {
+    redirect("/error");
+  }
+
+  redirect("/appointments");
+}
